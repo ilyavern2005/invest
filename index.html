@@ -1,15 +1,121 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta name="yandex-verification" content="1255dbe387c9c94c" />
-  <meta charset="UTF-8">
-  <title>Сайт для РСЯ — тестовая страница</title>
-  <meta name="description" content="Тестовый сайт для проверки домена в Рекламной сети Яндекса.">
-  <meta name="robots" content="index, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Калькулятор вкладов</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Сайт в разработке</h1>
-  <p>Этот сайт создан для проверки владения доменом и тестирования интеграции с РСЯ.</p>
-  <p>Основной контент будет добавлен позже.</p>
+    <div class="app">
+        <section class="card">
+            <h2 class="card__title">Параметры вклада</h2>
+
+            <div class="field">
+                <label for="first">Сумма вклада</label>
+                <input type="text" id="first" inputmode="decimal">
+            </div>
+
+            <div class="field">
+                <label for="percent">Процентная ставка</label>
+                <input type="text" id="percent" inputmode="decimal">
+            </div>
+
+            <div class="field">
+                <label for="typePercent">Периодичность выплат</label>
+                <select id="typePercent">
+                    <option value="day">Ежедневно</option>
+                    <option value="week">Еженедельно</option>
+                    <option value="month" selected>Ежемесячно</option>
+                    <option value="year">Ежегодно</option>
+                </select>
+            </div>
+
+            <div class="field field--checkbox">
+                <label class="checkbox">
+                    <input type="checkbox" id="capitalization">
+                    <span>Капитализация процентов</span>
+                </label>
+            </div>
+
+            <div class="field">
+                <label for="time">Срок вклада</label>
+                <div class="row">
+                    <input type="number" id="time" min="0">
+                    <select id="typeTime">
+                        <option value="day">Дни</option>
+                        <option value="week">Недели</option>
+                        <option value="month" selected>Месяцы</option>
+                        <option value="year">Годы</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="begin">Дата начала</label>
+                <input type="text" id="begin">
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 class="card__title">Пополнения и снятия</h2>
+
+            <div class="subsection">
+                <div class="subsection__head">
+                    <span>Пополнения</span>
+                    <button type="button" id="addTopUp" class="btn btn--small">+ Добавить</button>
+                </div>
+                <div id="topUps" class="rows"></div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection__head">
+                    <span>Снятия</span>
+                    <button type="button" id="addWithdrawal" class="btn btn--small">+ Добавить</button>
+                </div>
+                <div id="withdrawals" class="rows"></div>
+            </div>
+        </section>
+
+        <section class="card card--result">
+            <h2 class="card__title">Результат</h2>
+            <div class="result-grid">
+                <div class="result-item">
+                    <div class="result-item__label">Итоговая сумма</div>
+                    <div class="result-item__value" id="result">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-item__label">
+                        <span>Начислено процентов</span>
+                        <span class="result-dot result-dot--percent"></span>
+                    </div>
+                    <div class="result-item__value" id="sumPercent">0.00</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-item__label">
+                        <span>Вложено</span>
+                        <span class="result-dot result-dot--invested"></span>
+                    </div>
+                    <div class="result-item__value" id="invested">0.00</div>
+                </div>
+            </div>
+
+            <div class="pie">
+                <svg viewBox="0 0 42 42" class="pie__svg">
+                    <circle class="pie__bg" cx="21" cy="21" r="15.9155"></circle>
+                    <circle class="pie__seg pie__seg--invested" id="pieInvested"
+                            cx="21" cy="21" r="15.9155"></circle>
+                    <circle class="pie__seg pie__seg--percent" id="piePercent"
+                            cx="21" cy="21" r="15.9155"></circle>
+                </svg>
+            </div>
+        </section>
+    </div>
+
+    <script src="mech.js"></script>
+    <script src="calculate.js"></script>
 </body>
 </html>

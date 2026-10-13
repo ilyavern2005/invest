@@ -1,0 +1,431 @@
+:root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #1c2333;
+    --muted: #6b7a90;
+    --border: #e2e7f0;
+    --accent: #3b6cf6;
+    --accent-hover: #2b58d6;
+    --danger: #e5484d;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(20, 30, 60, 0.06), 0 8px 24px rgba(20, 30, 60, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 24px 16px;
+    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.app {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.card__title {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card--result {
+    background: linear-gradient(135deg, #3b6cf6 0%, #5b8bff 100%);
+    border: none;
+    color: #fff;
+}
+
+.card--result .card__title {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.field--checkbox {
+    flex-direction: row;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    gap: 8px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fbfcfe;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(59, 108, 246, 0.12);
+}
+
+.checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+    color: var(--text);
+    min-height: 24px;
+}
+
+.checkbox input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.checkbox span::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: #fbfcfe;
+    margin-right: 10px;
+    vertical-align: -4px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.checkbox input:checked + span::before {
+    background: var(--accent) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3 8.5 6.5 12 13 4.5'/></svg>") center / 14px no-repeat;
+    border-color: var(--accent);
+}
+
+.subsection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subsection__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    gap: 8px;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--accent);
+    color: #fff;
+    transition: background 0.15s, transform 0.05s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.btn:hover {
+    background: var(--accent-hover);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn--small {
+    padding: 6px 12px;
+    font-size: 13px;
+    background: #eef2fb;
+    color: var(--accent);
+}
+
+.btn--small:hover {
+    background: #e2e9fa;
+}
+
+.topup-row,
+.withdrawal-row {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1.2fr 32px;
+    gap: 8px;
+    align-items: center;
+}
+
+.topup-row input,
+.withdrawal-row input,
+.topup-row select,
+.withdrawal-row select {
+    padding: 8px 10px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.tu-remove,
+.wd-remove {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fbfcfe;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.tu-remove:hover,
+.wd-remove:hover {
+    background: #fdeaea;
+    color: var(--danger);
+    border-color: #f5c5c6;
+}
+
+.result-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.result-item__label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 4px;
+}
+
+.result-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.result-dot--invested {
+    background: #ffffff;
+}
+
+.result-dot--percent {
+    background: #ffd966;
+}
+
+.result-item__value {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    word-break: break-word;
+}
+
+.pie {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.pie__svg {
+    width: 140px;
+    height: 140px;
+    transform: rotate(-90deg);
+    flex-shrink: 0;
+}
+
+.pie__bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.18);
+    stroke-width: 3.8;
+}
+
+.pie__seg {
+    fill: none;
+    stroke-width: 3.8;
+    stroke-linecap: butt;
+    transition: stroke-dasharray 0.4s ease, stroke-dashoffset 0.4s ease;
+}
+
+.pie__seg--invested {
+    stroke: #ffffff;
+}
+
+.pie__seg--percent {
+    stroke: #ffd966;
+}
+
+@media (max-width: 960px) {
+    .app {
+        grid-template-columns: 1fr;
+        max-width: 640px;
+    }
+}
+
+@media (max-width: 560px) {
+    body {
+        padding: 12px 10px 24px;
+        font-size: 16px;
+    }
+
+    .app {
+        gap: 12px;
+    }
+
+    .card {
+        padding: 16px;
+        gap: 12px;
+        border-radius: 10px;
+    }
+
+    .card__title {
+        font-size: 15px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+    }
+
+    .topup-row,
+    .withdrawal-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "sum sum"
+            "date period"
+            "remove remove";
+        gap: 6px;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fafbfe;
+    }
+
+    .topup-row .tu-sum,
+    .withdrawal-row .wd-sum {
+        grid-area: sum;
+    }
+
+    .topup-row .tu-date,
+    .withdrawal-row .wd-date {
+        grid-area: date;
+    }
+
+    .topup-row .tu-period,
+    .withdrawal-row .wd-period {
+        grid-area: period;
+    }
+
+    .topup-row .tu-remove,
+    .withdrawal-row .wd-remove {
+        grid-area: remove;
+        width: 100%;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    .topup-row input,
+    .withdrawal-row input,
+    .topup-row select,
+    .withdrawal-row select {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+
+    .subsection__head {
+        font-size: 13px;
+    }
+
+    .btn,
+    .btn--small {
+        padding: 10px 14px;
+        font-size: 14px;
+        min-height: 40px;
+    }
+
+    .result-item__value {
+        font-size: 22px;
+    }
+
+    .pie__svg {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 360px) {
+    .topup-row,
+    .withdrawal-row {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "sum"
+            "date"
+            "period"
+            "remove";
+    }
+}
